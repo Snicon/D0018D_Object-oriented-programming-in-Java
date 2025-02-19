@@ -1,0 +1,12 @@
+.DS_Store
+**/.metadata/
+
+# Eclipse
+**/.classpath
+**/.project
+**/.settings/
+**/bin/
+**/*.class
+
+# Project files
+**/*.zip
