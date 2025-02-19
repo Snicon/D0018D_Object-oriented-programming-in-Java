@@ -30,7 +30,7 @@ import java.util.Objects;
 public class BankLogic {
 
 	// ArrayList storing all the customer objects in the bank application
-	public ArrayList<Customer> customers = new ArrayList<Customer>();
+	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	
 	/**
 	 * Makes a list of all customers formatted as strings by iterating over the existing customers.
