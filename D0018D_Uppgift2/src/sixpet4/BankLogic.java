@@ -144,6 +144,16 @@ public class BankLogic {
 		// Return the account number per the assignment requirements
 		return account.getNumber();
 	}
+	
+	// TODO: Implement method
+	public int createCreditAccount(String pNo) {
+		return -1;
+	}
+	
+	// TODO: Implement method
+	public List<String> getTransactions(String pNo, int AccountId) {		
+		return new ArrayList<String>();
+	}
 
 	
 	/**
