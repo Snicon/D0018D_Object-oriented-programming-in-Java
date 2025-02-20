@@ -43,7 +43,7 @@ public class BankLogic {
 			allCustomerData.add(customer.toString());
 		}
 		
-		return allCustomerData;
+		return List.copyOf(allCustomerData); // LOG: Changed to copyOf based on feedback from Assignment 1
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class BankLogic {
 		}
 		
 		// Finally return the ArrayList
-		return customerData;
+		return List.copyOf(customerData); // LOG: Changed to copyOf based on feedback from Assignment 1
 	}
 	
 	/**
