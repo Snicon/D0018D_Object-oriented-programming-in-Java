@@ -2,6 +2,8 @@ package sixpet4;
 
 import java.util.ArrayList;
 
+import sixpet4.accounts.Account;
+
 /**
  * Customer class is the "blueprint" for creating customer objects. As commonly seen in OOP applications the class contains a bunch of getters and setters as well as a constructor.
  * I've opted to keep the accounts closely coupled to the Customer class due to simplicity.

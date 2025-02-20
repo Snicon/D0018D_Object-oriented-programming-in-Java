@@ -1,4 +1,4 @@
-package sixpet4;
+package sixpet4.accounts;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import sixpet4.accounts.Account;
+
 /**
  * The BankLogic class do most of the business logic of the application. All changes in data states are done in this class. This includes:
  * <ul>
