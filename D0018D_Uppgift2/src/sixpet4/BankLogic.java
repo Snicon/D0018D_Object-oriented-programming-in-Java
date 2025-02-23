@@ -8,6 +8,9 @@ import java.util.Locale;
 import java.util.Objects;
 
 import sixpet4.accounts.Account;
+import sixpet4.accounts.CreditAccount;
+import sixpet4.accounts.SavingsAccount;
+import sixpet4.transactions.Transaction;
 
 /**
  * The BankLogic class do most of the business logic of the application. All changes in data states are done in this class. This includes:
@@ -27,7 +30,7 @@ import sixpet4.accounts.Account;
  * Additionally there are helper methods for formatting currency as well as finding objects to ease the process of implementing the business logic.
  * 
  * @author Sixten Peterson, sixpet-4
- * @version 1.0 (assignment 1)
+ * @version 2.0 (assignment 2, pre-feedback)
  */
 public class BankLogic {
 
@@ -133,26 +136,63 @@ public class BankLogic {
 		Customer customer = findCustomerByPNo(pNo);
 		
 		// Customer not found, handle null
-		if(customer == null) {
+		if (customer == null) {
 			return -1;
 		}
 		
 		// Create a new account and assign it to the customer
-		Account account = new Account();
+		SavingsAccount account = new SavingsAccount();
 		customer.addAccount(account);
 		
 		// Return the account number per the assignment requirements
 		return account.getNumber();
 	}
 	
-	// TODO: Implement method
+	/**
+	 * Creates a credit account and assigns it to a customer based on the provided personal number.
+	 * @param pNo the personal number of the customer that will be holding the credit account.
+	 * @return -1 if customer was not found, account number if the account was created and assigned to the customer.
+	 */
 	public int createCreditAccount(String pNo) {
-		return -1;
+		Customer customer = findCustomerByPNo(pNo);
+		
+		// Customer not found, handle null
+		if (customer == null) {
+			return -1;
+		}
+		
+		// Create a new account and assign it to the customer
+		CreditAccount account = new CreditAccount();
+		customer.addAccount(account);
+		
+		return account.getNumber();
 	}
 	
-	// TODO: Implement method
-	public List<String> getTransactions(String pNo, int AccountId) {		
-		return new ArrayList<String>();
+	/**
+	 * Gets a list of all transactions for a given customer account.
+	 * @param pNo the personal number of the customer that will be holding the credit account.
+	 * @param accountId the number of the account to retrieve transactions from. 
+	 * @return
+	 */
+	public List<String> getTransactions(String pNo, int accountId) {
+		List<String> transactionData = new ArrayList<String>();
+		
+		Account account = findAccountByPNoAndNum(pNo, accountId);
+		
+		// Account not found, return null per the requirements of the assignment (2)
+		if(account == null) {
+			return null;
+		}
+		
+		List<Transaction> transactions = account.getTransactions();
+		
+		if (transactions.isEmpty()) {
+			return transactionData;
+		}
+		
+		transactions.forEach( (transaction) -> { transactionData.add(transaction.toString()); } ); // Wanted to try something new, never worked with lambdas before. Please see this page for reference: https://www.w3schools.com/java/ref_arraylist_foreach.asp
+		
+		return List.copyOf(transactionData);
 	}
 
 	
@@ -173,7 +213,7 @@ public class BankLogic {
 	}
 	
 	/**
-	 * Deposits any sum larger than 0 (integers) to the specified account of the specified user.
+	 * Deposits any sum larger than 0 (integers) to the specified account of the specified user. Supports different account types as of assignment 2.
 	 * @param pNo the personal number of the customer holding the account to deposit to.
 	 * @param accountId the unique identifier of the account to deposit to.
 	 * @param amount the amount to deposit.
@@ -187,23 +227,17 @@ public class BankLogic {
 			return false;
 		}
 		
-		// The deposit was too small, return false per the requirements of the assignment
-		if(amount <= 0) {
-			return false;
-		}
-		
 		BigDecimal convertedAmount = new BigDecimal(amount);			// Convert int to BigDecimal, needed for VG
-		account.setBalance(account.getBalance().add(convertedAmount));	// Using BigDecimal to add the converted BigDecimal to the new account amount
 		
-		return true;
+		return account.deposit(convertedAmount); // Using BigDecimal to add the converted BigDecimal to the new account amount
 	}
 	
 	/**
-	 * Withdraws any sum larger than 0 (integers) to the specified account of the specified user
+	 * Withdraws any sum larger than 0 (integers) to the specified account of the specified user. Supports different account types as of assignment 2.
 	 * @param pNo personal number of the customer holding the account to withdraw from.
 	 * @param accountId the unique identifier of the account to withdraw from.
 	 * @param amount
-	 * @return
+	 * @return true if successful, false if unsuccessful
 	 */
 	public boolean withdraw(String pNo, int accountId, int amount) {
 		Account account = findAccountByPNoAndNum(pNo, accountId);
@@ -213,21 +247,9 @@ public class BankLogic {
 			return false;
 		}
 		
-		// The withdrawal was too small, return false per the requirements of the assignment
-		if (amount <= 0) {
-			return false;
-		}
+		BigDecimal convertedAmount = new BigDecimal(amount); // Convert int to BigDecimal as BigDecimal is needed for VG
 		
-		BigDecimal convertedAmount = new BigDecimal(amount); // Convert int to BigDecimal as BigDecimal was needed for VG
-		
-		// Check withdrawal amount is bigger than the account balance, AKA can the customer afford the withdrawal. If it can't, returns false per the assignment requirements
-		if (convertedAmount.compareTo(account.getBalance()) > 0) { // Didn't know what method to look for in BigDecimal comparison at first, Course Book (Java Hot to Program, Late Objects 11:th ed) was of no help, found this answer on StackOverflow as a reference: https://stackoverflow.com/a/52909664
-			return false;
-		}
-		
-		account.setBalance(account.getBalance().subtract(convertedAmount));	// Using BigDecimal to subtract the converted amount (BigDecimal)
-		
-		return true;
+		return account.withdraw(convertedAmount);
 	}
 	
 	/**

@@ -22,7 +22,7 @@ public class Account {
 	// Constructor for creation
 	public Account() {
 		lastAssignedNumber++;
-		number = lastAssignedNumber;
+		this.number = lastAssignedNumber;
 	}
 	
 	/**

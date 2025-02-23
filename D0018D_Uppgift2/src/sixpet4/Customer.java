@@ -1,6 +1,7 @@
 package sixpet4;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import sixpet4.accounts.Account;
 
@@ -9,7 +10,7 @@ import sixpet4.accounts.Account;
  * I've opted to keep the accounts closely coupled to the Customer class due to simplicity.
  * 
  * @author Sixten Peterson, sixpet-4
- * @version 1.0 (assignment 1)
+ * @version 1.1 (assignment 1, post-feedback)
  */
 public class Customer {
 
@@ -68,8 +69,8 @@ public class Customer {
 	 * Get the customers account(s).
 	 * @return The accounts
 	 */
-	public ArrayList<Account> getAccounts() {
-		return accounts;
+	public List<Account> getAccounts() {
+		return List.copyOf(this.accounts);
 	}
 	
 	/**
