@@ -2,8 +2,6 @@ package sixpet4.accounts;
 
 import java.math.BigDecimal;
 
-import sixpet4.transactions.TransactionType;
-
 /**
  * CreditAccount class is the "blueprint" for credit account objects. It extends Account and currently houses a constructor handling the fields related to the
  * super class. Additionally it keeps track of credit debt limit and interest. There are implementations of withdrawal and getting interest rate to meet the
@@ -41,7 +39,7 @@ public class CreditAccount extends Account {
 		
 		// Process successful withdrawal
 		this.setBalance(newBalance);
-		this.registerTransaction(TransactionType.WITHDRAW, amount.negate()); // Register transaction on the account via helper method
+		this.registerTransaction(amount.negate()); // Register transaction on the account via helper method
 		return true;
 	}
 	

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Locale;
 
 import sixpet4.transactions.Transaction;
-import sixpet4.transactions.TransactionType;
 
 /**
  * Account class is the "blueprint" for the account objects, currently housing a constructor keeping track of unique account numbers as well as a bunch of getter and setters.
@@ -47,7 +46,7 @@ public abstract class Account {
 		}
 		
 		this.setBalance(this.getBalance().add(amount));	// Using BigDecimal to add the BigDecimal amount to the new account amount
-		this.registerTransaction(TransactionType.DEPOSIT, amount); // Adds the transaction to the list of transactions for the account
+		this.registerTransaction(amount); // Adds the transaction to the list of transactions for the account
 		
 		return true;
 	}
@@ -68,20 +67,20 @@ public abstract class Account {
 	}
 	
 	/**
-	 * Calculates the interest of the account.
-	 * @return The account interest as a BigDecimal
-	 */
-	public BigDecimal calculateInterest() {
-		return this.getBalance().multiply(this.getInterestRate()).divide(new BigDecimal(100));
-	}
-
-	/**
 	 * Sets a new balance for the account. Protected to stop external logic from changing account balance, this method should only be used
 	 * during implementation of withdrawal and deposits as of assignment 2.
 	 * @param balance the new balance to be set
 	 */
 	protected void setBalance(BigDecimal balance) {
 		this.balance = balance;
+	}
+	
+	/**
+	 * Calculates the interest of the account.
+	 * @return The account interest as a BigDecimal
+	 */
+	public BigDecimal calculateInterest() {
+		return this.getBalance().multiply(this.getInterestRate()).divide(new BigDecimal(100));
 	}
 
 	/**
@@ -109,11 +108,11 @@ public abstract class Account {
 	}
 
 	/**
-	 * Sets the account number.
-	 * @param number the new account number that will be set
+	 * Gets the type of the account.
+	 * @return The account type.
 	 */
-	public void setNumber(int number) {
-		this.number = number;
+	public String getType() {
+		return type;
 	}
 	
 	/**
@@ -123,22 +122,14 @@ public abstract class Account {
 	public List<Transaction> getTransactions() {
 		return List.copyOf(this.transactions);
 	}
-
-	/**
-	 * Gets the type of the account.
-	 * @return The account type.
-	 */
-	public String getType() {
-		return type;
-	}
 	
 	/**
 	 * Registers a transaction of any type.
 	 * @param type the type of transactions, either "Withdraw" or "Deposit".
 	 * @param amount the amount of the transaction, positive for deposits and negative for withdrawals.
 	 */
-	protected void registerTransaction(TransactionType type, BigDecimal amount) {
-		this.transactions.add(new Transaction(type, amount, this.getBalance()));
+	protected void registerTransaction(BigDecimal amount) {
+		this.transactions.add(new Transaction(amount, this.getBalance()));
 	}
 	
 	/**

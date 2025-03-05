@@ -2,8 +2,6 @@ package sixpet4.accounts;
 
 import java.math.BigDecimal;
 
-import sixpet4.transactions.TransactionType;
-
 /**
  * SavingsAccount class is the "blueprint" for savings account objects. It extends Account and currently houses a constructor handling the fields related to the
  * super class. Additionally it keeps track of free withdrawal as well as withdrawal fee rate. There is an implementation of withdrawal to meet the requirements
@@ -48,7 +46,7 @@ public class SavingsAccount extends Account {
 	    }
 		
 		this.setBalance(this.getBalance().subtract(totalAmountToWithdraw));
-		this.registerTransaction(TransactionType.WITHDRAW, totalAmountToWithdraw.negate()); // Register transaction on the account via helper method
+		this.registerTransaction(totalAmountToWithdraw.negate()); // Register transaction on the account via helper method
 		
 		return true;
 	}

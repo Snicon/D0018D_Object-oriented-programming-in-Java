@@ -184,12 +184,15 @@ public class BankLogic {
 			return null;
 		}
 		
+		// Get the transactions from the account
 		List<Transaction> transactions = account.getTransactions();
 		
+		// In case of empty transaction list, return a copy of the empty transaction list.
 		if (transactions.isEmpty()) {
-			return transactionData;
+			return List.copyOf(transactionData);
 		}
 		
+		// Add each transaction into the transactionData list
 		transactions.forEach( (transaction) -> { transactionData.add(transaction.toString()); } ); // Wanted to try something new, never worked with lambdas before. Please see this page for reference: https://www.w3schools.com/java/ref_arraylist_foreach.asp
 		
 		return List.copyOf(transactionData);
@@ -324,7 +327,7 @@ public class BankLogic {
 		
 		return deletedCustomerData;
 	}
-	
+
 	/*
 	 * 
 	 * HELPER METHODS

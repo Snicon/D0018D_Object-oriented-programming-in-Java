@@ -16,7 +16,6 @@ import java.util.Locale;
  * @version 2.0 (Assignment 2, pre-feedback)
  */
 public class Transaction {
-	private final TransactionType type; 	// The type of transaction (Assignment (2) specifies withdrawal and deposits as different types of transactions)
 	private final BigDecimal amount; 		// The amount of money in the transaction (negative for withdrawal, positive for deposit)
 	private final BigDecimal balanceAfter; 	// The account balance after the transaction
 	private final LocalDateTime dateTime; 	// The date and time of the transaction
@@ -29,8 +28,7 @@ public class Transaction {
      * @param amount The amount involved in the transaction.
      * @param balanceAfter The balance after the transaction took place.
      */
-	public Transaction(TransactionType type, BigDecimal amount, BigDecimal balanceAfter) {
-		this.type = type;
+	public Transaction(BigDecimal amount, BigDecimal balanceAfter) {
 		this.amount = amount;
 		this.balanceAfter = balanceAfter;
 		this.dateTime = LocalDateTime.now(); // Time stamp, set at creation in constructor for simplicity
