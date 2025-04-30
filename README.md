@@ -13,6 +13,12 @@ We just made a hello world program and handed in for our own sake to make sure w
 ### Assignment 1 - Classes and object
 To be added.
 
+### Assignment 2 - Inheritance, polymorphism and class design
+To be added.
+
+### Assignment 3 - Graphical user interfaces
+To be added.
+
 ## Progress & grades
 
 ### Assignments
@@ -20,8 +26,8 @@ To be added.
 | Assignment   | Handed in | Grade      | Best possible grade |
 |--------------|-----------|------------|---------------------|
 | Assignment 1 | &#9745;   | VG         | VG                  |
-| Assignment 2 | &#9744;   | -          | VG                  |
-| Assignment 3 | &#9744;   | -          | VG                  |
+| Assignment 2 | &#9745;   | VG         | VG                  |
+| Assignment 3 | &#9745;   | -          | VG                  |
 | Assignment 4 | &#9744;   | -          | VG                  |
 | Final exam   | &#9744;   | -          | VG                  |
 
