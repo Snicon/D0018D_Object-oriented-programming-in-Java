@@ -28,7 +28,7 @@ To be added.
 | Assignment 1 | &#9745;   | VG         | VG                  |
 | Assignment 2 | &#9745;   | VG         | VG                  |
 | Assignment 3 | &#9745;   | -          | VG                  |
-| Assignment 4 | &#9744;   | -          | VG                  |
+| Assignment 4 | &#9745;   | -          | VG                  |
 | Final exam   | &#9744;   | -          | VG                  |
 
 ### Final grade
